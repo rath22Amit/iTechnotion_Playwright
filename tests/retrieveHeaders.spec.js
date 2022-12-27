@@ -30,7 +30,7 @@ test.describe("iTechNotation Application", ()=>{
 
     })
 
-    test("Retrieve all the features in vDoctor page",async({page})=>{
+    test("Retrieve all the technologies in vDoctor page",async({page})=>{
         await page.goto("https://itechnotion.com/what-will-be-the-cost-of-an-app-like-justdial-its-indias-no-1-local-business-directory/")
         await page.waitForLoadState()
         await page.locator("(//a[text()='Products'])[2]").click()
@@ -40,9 +40,30 @@ test.describe("iTechNotation Application", ()=>{
         await v_Doctor.click()
         await expect(page).toHaveURL("https://startupfo.rest/white-label-telemedicine-app/")
         await page.waitForLoadState()
-        const v_Doctor_features=await page.locator("(//ul[@class='list-unstyled text-muted'])[3]/li").allTextContents()
-        for(let i=0;i<=v_Doctor_features.length;i++){
-            console.log(i+1+" "+v_Doctor_features[i])
+        const v_Doctor_technologies=await page.locator("(//ul[@class='list-unstyled text-muted'])[3]/li").allTextContents()
+        for(let i=0;i<=v_Doctor_technologies.length;i++){
+            console.log(i+1+" "+v_Doctor_technologies[i])
         }
     })
+
+    test.only("Retrieve all the Features in vDoctor page",async({page})=>{
+        await page.goto("https://itechnotion.com/what-will-be-the-cost-of-an-app-like-justdial-its-indias-no-1-local-business-directory/")
+        await page.waitForLoadState()
+        await page.locator("(//a[text()='Products'])[2]").click()
+        const dropdown_element=page.locator("(//a[text()='Poros'])[2]")
+        await expect(dropdown_element).toBeVisible()
+        const v_Doctor=page.locator("(//a[text()='vDoctor'])[2]")
+        await v_Doctor.click()
+        await expect(page).toHaveURL("https://startupfo.rest/white-label-telemedicine-app/")
+        await page.waitForLoadState()
+        const feature_menu_button= page.locator("//a[text()='Features']")
+        await feature_menu_button.click()
+        const v_Doctor_features=await page.locator("//div[@class='media-body']/h4").allTextContents()
+        for(let i=0;i<=v_Doctor_features;i++){
+            console.log(i+1+" "+v_Doctor_features[i])
+        }
+
+    })
+
+    
 })
