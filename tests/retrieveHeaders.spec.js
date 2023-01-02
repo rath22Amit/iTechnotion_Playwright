@@ -1,5 +1,7 @@
 
 import {test,expect} from '@playwright/test'
+import {Data, testData} from '../Resources/testData'
+
 
 test.describe("iTechNotation Application", ()=>{
     test("Retrieve all the headers", async({page})=>{
@@ -65,37 +67,40 @@ test.describe("iTechNotation Application", ()=>{
 
     })
 
-    test.only("Get Quote in vDoctor Page", async({page})=>{
-        await page.goto("https://itechnotion.com/what-will-be-the-cost-of-an-app-like-justdial-its-indias-no-1-local-business-directory/")
-        await page.waitForLoadState()
-        await page.locator("//ul[@id='pixzlo-main-menu']/li[2]").click()
-        const dropdown_element=page.locator("(//a[text()='Poros'])[2]")
-        await expect(dropdown_element).toBeVisible()
-        const v_Doctor=page.locator("(//a[text()='vDoctor'])[2]")
-        await v_Doctor.click()
-        await expect(page).toHaveURL("https://startupfo.rest/white-label-telemedicine-app/")
-        await page.waitForLoadState()
-        const get_Quote=page.locator("//div[@class='buy-button']/a")
-        await get_Quote.click()
-
-        const frameLocator=await page.frameLocator(".hs-form-iframe")
-        const first_name= frameLocator.locator("//input[@name='firstname']")
-        const email=frameLocator.locator("//input[@name='email']")
-        const country=frameLocator.locator("//input[@name='country']")
-        const message=frameLocator.locator("//textarea[@name='message']")
-        const checkbox_1=frameLocator.locator("(//input[@name='voomplatform'])[1]")
-        const submitButton=frameLocator.locator("//input[@value='Submit']")
-        const title_heading=page.locator("//h4[text()='Thank you for contacting']")
-        await first_name.fill("Amit Rath")
-        await email.fill("atest_t@gmail.com")
-        await country.fill("India")
-        await message.fill("Hi I am an Indian")
-        await checkbox_1.click()
-        await submitButton.click()
-
-        await expect(title_heading).toBeVisible()
-        
-    })
-
     
-})
+        test.only("Get Quote in vDoctor Page ", async({page})=>{
+            await page.goto("https://itechnotion.com/what-will-be-the-cost-of-an-app-like-justdial-its-indias-no-1-local-business-directory/")
+            await page.waitForLoadState()
+            await page.locator("//ul[@id='pixzlo-main-menu']/li[2]").click()
+            const dropdown_element=page.locator("(//a[text()='Poros'])[2]")
+            await expect(dropdown_element).toBeVisible()
+            const v_Doctor=page.locator("(//a[text()='vDoctor'])[2]")
+            await v_Doctor.click()
+            await expect(page).toHaveURL("https://startupfo.rest/white-label-telemedicine-app/")
+            await page.waitForLoadState()
+            const get_Quote=page.locator("//div[@class='buy-button']/a")
+            await get_Quote.click()
+            const frameLocator=await page.frameLocator(".hs-form-iframe")
+            const first_name= frameLocator.locator("//input[@name='firstname']")
+            const email=frameLocator.locator("//input[@name='email']")
+            const country=frameLocator.locator("//input[@name='country']")
+            const message=frameLocator.locator("//textarea[@name='message']")
+            const checkbox_1=frameLocator.locator("(//input[@name='voomplatform'])[1]")
+            const submitButton=frameLocator.locator("//input[@value='Submit']")
+            const title_heading=page.locator("//h4[text()='Thank you for contacting']")
+            await first_name.fill(Data.first_name)
+            await email.fill(Data.emailId)
+            await country.fill(Data.country)
+            await message.fill(Data.message)
+            await checkbox_1.click()
+            await submitButton.click()
+        
+            await expect(title_heading).toBeVisible()
+                
+            }) 
+    });
+        
+    
+    
+    
+    
