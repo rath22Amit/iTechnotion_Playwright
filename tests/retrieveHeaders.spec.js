@@ -71,7 +71,9 @@ test.describe("iTechNotation Application", ()=>{
         test.only("Get Quote in vDoctor Page ", async({page})=>{
             await page.goto("https://itechnotion.com/what-will-be-the-cost-of-an-app-like-justdial-its-indias-no-1-local-business-directory/")
             await page.waitForLoadState()
-            await page.locator("//ul[@id='pixzlo-main-menu']/li[2]").click()
+            await page.waitForTimeout(2000)
+            await page.waitForSelector("(//a[contains(@class,'nav-link dropdown-toggle')][normalize-space()='Products'])[1]",{state:"visible",timeout:1500})
+            await page.locator("(//a[contains(@class,'nav-link dropdown-toggle')][normalize-space()='Products'])[1]").click()
             const dropdown_element=page.locator("(//a[text()='Poros'])[2]")
             await expect(dropdown_element).toBeVisible()
             const v_Doctor=page.locator("(//a[text()='vDoctor'])[2]")
